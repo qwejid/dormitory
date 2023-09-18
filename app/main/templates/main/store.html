@@ -1,0 +1,68 @@
+{% extends 'main/base2.html' %}
+{% load static %}
+
+{% block title %}<title>КГУ Магазин</title>{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'main/css/store.css' %}">
+{% endblock %}    
+
+
+      {% block main %}
+      <div class="jumbotron p-3 text-black rounded" style="background-image: url(../../static/main/images/обмен.jpg); background-size: cover; background-position: 50% 10%;background-size: cover; padding: 5rem!important;">
+        <div class="col-md-6 px-0">
+          <h1 class="display-3 font-italic">Барахолка КГУ</h1>
+          <p class="lead my-3">Добро пожаловать в наш уникальный магазин обмена и продажи товаров! Здесь вы найдете все, что нужно для удобной и успешной студенческой жизни. Обменивайтесь своими вещами с другими студентами, находите уникальные предметы и покупайте необходимые товары по договорной цене.</p>
+        </div>
+      </div>    
+    </div>
+
+
+    <a name="section1" ></a>
+    <div style="padding: 30px 0 ;">
+            
+      <div class="cat">    
+          {% if cat_selected == 0 %}
+              <li class="double-border-button">Все категории</li>
+          {% else %}
+              <li><a href="{% url 'store' %}#section1" class="double-border-button no-scroll-effect">Все категории</a></li>
+          {% endif %}
+  
+          {% for c in cats %}
+              {% if c.pk == cat_selected %}
+                  <li class="double-border-button">{{ c.name }}</li>
+              {% else %}
+                  <li><a href="{{ c.get_absolute_url }}#section1" class="double-border-button no-scroll-effect">{{ c.name }}</a></li>
+              {% endif %}
+          {% endfor %}
+      </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for p in product %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top"  src="{{p.image.url}}" alt="Картинка" width="100%" height="325" style="object-fit: cover;">
+                      
+            <div class="card-body">
+              <p class="card-text" style="font-weight:bold; font-size: 1.5em;">{{ p.name|truncatewords:6 }}
+              <br>{{ p.price }}₽
+              </p>              
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ p.get_absolute_url }}" class="but">Просмотреть</a></button>
+                  
+                </div>
+                <small class="text-muted">{{ p.publication_date }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endfor %}              
+        
+      </div>  
+  </div> </div> 
+
+{% endblock %}

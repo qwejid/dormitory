@@ -1,0 +1,32 @@
+{% extends 'main/base2.html' %}
+{% load static %}
+
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'main/css/card.css' %}">
+{% endblock %} 
+{% block title %}<title>{{ card.name }}</title>{% endblock %}
+       
+    
+  {% block main %}
+  <div class="container" style="display: block; justify-content: center;">
+    
+<div class="card mb-3" style="max-width: 1540px; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{card.image.url}}" class="img-fluid rounded-start" alt="Картинка товара">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body ">
+          <h5 class="card-title" style="font-size: 2em;">{{ card.name }}</h5>
+          <p class="card-text">{{ card.description }}</p>
+          <p class="card-text">Цена: <span class="price">{{ card.price }}₽</span></p>
+          <p class="card-text">Для подтверждения покупки и связи со мной: <a href="{{card.link}}" target="_blank">{{ card.link }}</a></p>
+          <p class="card-text date"><small class="text-muted" >{{ card.publication_date }}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endblock %}
+

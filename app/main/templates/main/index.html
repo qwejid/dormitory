@@ -1,0 +1,97 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}<title>Общежитие КГУ – Калужский государственный университет имени.Циолковского</title>{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/news.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+      <h1 class="dormitory-wrap" style="padding: 30px 7px; justify-content:left;">Последние новости Администрации</h1>
+      <div class="dormitory-wrap">
+    
+
+        {% for p in post_news %}
+        
+        <div class="my-3 mx-auto p-relative bg-white shadow-1 orange-hover" style="width: 340px; overflow: hidden; border-radius: 1px; display: inline-block;">
+            
+            {% if p.image %}
+            <img src="{{p.image.url }}" alt="Картинка" class="d-block w-full" style="width: 340px; height: 300px; object-fit: cover;">
+            {% else %}
+            <img src="{% static 'main/images/Admin.jpg' %}"" alt="Картинка" class="d-block w-full" style="width: 340px; height: 300px; object-fit: cover;">
+            {% endif %}
+        
+            <div class="px-1 py-0">
+                <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-1px">
+                    {{ p.date }}
+                </p>
+        
+                <h1 class="ff-serif font-weight-bolder text-black card-heading mt-0 mb-2" style="line-height: 1.25;">
+                    {{p.title}}
+                </h1>
+                <p class="mb-1 pyy-1"><a href="{{ p.get_absolute_url }}" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" style="position: absolute; bottom: 0;  left: 0;">
+                Читать далее...
+            </a></p>
+            </div>
+        
+       
+        
+        </div>
+        
+        {% endfor %}
+        </div>
+
+    <h1 class="dormitory-wrap" style="padding: 30px 7px; justify-content:left;">Наши общежития</h1>
+    <div class="dormitory-wrap">     
+      <div class="dormitory-item">
+        <div class="dormitory-item-wrap">      
+          <img src="{% static 'main/images/общ2.jpg' %}">
+          <div class="dormitory-item-inner">
+            <div class="dormitory-heading">              
+              <h3>Общежитие 2</h3>
+            </div>
+            <ul>
+              <li><a class="aind" href="">Как добраться</a></li>            
+              <li><a class="aind" href="">Контакты</a></li>
+            </ul>
+           </div>      
+        </div>
+      </div>  
+
+      <div class="dormitory-item">
+        <div class="dormitory-item-wrap">            
+          <img src="{% static 'main/images/общ3.jpg' %}">
+          <div class="dormitory-item-inner">
+            <div class="dormitory-heading">              
+              <h3>Общежитие 3</h3>
+            </div>
+            <ul>
+              <li><a class="aind" href="">Как добраться</a></li>            
+              <li><a class="aind" href="">Контакты</a></li>
+            </ul>
+           </div>      
+        </div>
+      </div> 
+
+      <div class="dormitory-item">
+        <div class="dormitory-item-wrap">      
+          <img src="{% static 'main/images/общ4.jpg' %}">
+          <div class="dormitory-item-inner">
+            <div class="dormitory-heading">              
+              <h3>Общежитие 4</h3>
+            </div>
+            <ul>
+              <li><a class="aind" href="">Как добраться</a></li>            
+              <li><a class="aind" href="">Контакты</a></li>
+            </ul>
+           </div>      
+        </div>
+      </div> 
+      
+    </div>
+  </div>
+    
+
+{% endblock %}

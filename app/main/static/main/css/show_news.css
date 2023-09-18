@@ -1,0 +1,87 @@
+.title{
+       
+  background-color: rgba(17, 16, 15, 0.722);
+  color: white; 
+  font: 2.6rem/1.4 "HSE Slab", serif;
+  font-size:larger; 
+  font-weight:bold; 
+  padding: 5px 0px;
+  
+  
+  
+}
+
+.container h1{
+  position: absolute;
+  top: 230px; 
+  width: 890px; 
+  padding-left: 50px;
+  
+ 
+  
+}
+
+.container {
+  width: 990px;
+  display: block;
+  justify-content: center;
+}
+
+.image-container {  
+  display: flex;
+  justify-content: center; /* Выравнивание по горизонтали */
+  align-items: center; /* Выравнивание по вертикали */
+  max-width: 100%;
+  width: 970px;
+  height: 430px;
+  overflow: hidden;
+  padding: 20px;
+ 
+  
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: flex;
+  justify-content: center; /* Выравнивание по горизонтали */
+  align-items: center; /* Выравнивание по вертикали */
+  
+}
+
+  
+.text {
+  padding: 0px 10,5vh;
+  font: 1.6rem/1.4 "HSE Slab", serif;
+  text-indent: 1.5em; 
+  
+}
+
+.text-content {
+  display: block;
+  justify-content: center;
+  
+}
+
+
+.date {
+    text-align: right;
+}
+
+
+.text-orange {
+  color: rgba(69, 63, 55, 0.722);
+}
+
+
+.base2 .nav {  
+  margin: 20px 0px;
+}
+
+.tran:hover {
+  transform: scale(1.15);
+  transition: transform 0.5s;
+}
+   
+  

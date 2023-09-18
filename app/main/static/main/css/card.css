@@ -1,0 +1,29 @@
+.tran:hover {
+    transform: scale(1.15);
+    transition: transform 0.5s;
+  }
+
+  .date {
+    text-align: right;
+    justify-content:flex-end;
+  }
+  
+  .card-body {
+    display: block;
+    justify-content: center;       
+  }
+
+  .col-md-8 {
+    /* text-align: center; */
+    padding: 3% 5% 0;
+    box-sizing: border-box;
+  }
+
+  .price {
+    background-color: rgb(75, 185, 75);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 1.5em;        
+  }

@@ -1,0 +1,359 @@
+/* кнопка */
+
+
+
+/* ------------------------------------------ */
+
+
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.tran:hover {
+  transform: scale(1.15);
+  transition: transform 0.5s;
+}
+
+.cat {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  
+}
+
+.no-scroll-effect {
+  scroll-behavior:auto; /* Или scroll-behavior: initial; */
+}
+
+
+/* Применение стилей к списку категорий */
+.cat li {
+  list-style: none;
+  color: red;
+  font-family: 'Montserrat', sans-serif;
+  
+  
+}
+
+.cat li a {
+  text-decoration: none;
+  color: #464343; /* Цвет ссылки, можно изменить на свой */
+  font-weight:bold;
+  font-family:sans-serif;
+ 
+}
+
+/* .cat li a:hover {
+  text-decoration: underline;  
+} */
+
+.dormitory-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.text-black {
+  color: rgba(0,0,0,0.9);
+}
+.text-muted {
+  color: rgba(0, 0, 0, 0.3);
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.ff-serif {
+  font-family: 'Lora', serif;
+}
+
+.font-weight-normal {
+  font-weight: normal;
+  
+}
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-bolder {
+  font-weight: bolder;
+}
+
+ .lts-1px {
+   letter-spacing: 1px;
+}
+.lts-2px {
+  letter-spacing: 2px;
+}
+.w-full {
+  width: 100%;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+.d-block {
+  display: block;
+}
+.d-inline-block {
+  display: inline-block;
+}
+
+.p-relative {
+  position: relative;
+  
+}
+.p-absolute {
+  position: absolute
+}
+
+.bg-white {
+  background-color: #fff;
+}
+.small {
+  font-size: 0.75rem;
+}
+.card-heading {
+  font-size: 1.25rem;
+}
+.styled-link {
+  text-decoration: none;
+  outline: none;
+  color: #fe8f21;
+  transition: all 0.25s ease-in; 
+}
+.styled-link:hover,
+.styled-link:focus,
+.styled-link:active {
+  color: #febc53;
+}
+.shadow-1 {
+  box-shadow: 2px 2px 5px 0 rgba(0,0,0,0.15);
+}
+.orange-hover {
+  transition: all 0.25s ease-in;
+  border-bottom: 5px solid transparent;
+}
+.orange-hover:hover {
+  transform: translateY(-5px);
+  border: none;
+  border-bottom: 5px solid #fe8f21;
+}
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.float-left {
+  float: left;
+}
+.float-right{
+  float: right;
+}
+
+/**Margin and padding utilities*/
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+.mx-0 {
+  margin-left: 0;
+  margin-right: 0;
+}
+.mx-1 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.mx-2 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.mx-3 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.mx-35 {
+  margin-left: 3.5rem;
+  /* margin-right: 3.5rem;   */
+}
+
+.mx-35:last-child {
+  /* margin-left: 3.5rem; */
+  margin-left: none;  
+}
+
+.my-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.my-1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.my-2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.my-3 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+.mt-1 {
+  margin-top: 1rem;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.mt-3 {
+  margin-top: 3rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mb-2 {
+  margin-bottom: 2rem;
+}
+.mb-3 {
+  margin-bottom: 3rem;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+.ml-1 {
+  margin-left: 1rem;
+}
+.ml-2 {
+  margin-left: 1rem;
+}
+.ml-3 {
+  margin-left: 3rem;
+}
+
+.px-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+.px-1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-2 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.px-3 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+
+.py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.pyy-1 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.py-2 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.py-3 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+.pt-1 {
+  padding-top: 1rem;
+}
+.pt-2 {
+  padding-top: 2rem;
+}
+.pt-3 {
+  padding-top: 3rem;
+}
+
+.pb-0 {
+  padding-bottom: 0;
+}
+.pb-1 {
+  padding-bottom: 1rem;
+}
+.pb-2 {
+  padding-bottom: 2rem;
+}
+.pb-3 {
+  padding-bottom: 3rem;
+}
+
+.double-border-button {
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 20px;
+  padding: 10px 30px;
+  position: relative;
+  border: 2px solid #4a4747;
+  color: #4a4747;
+  font-family: 'Montserrat', sans-serif;
+  transition: .4s;
+}
+.double-border-button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  border: 2px solid rgba(0, 0, 0, 0);
+  transition: .4s;
+}
+.double-border-button:hover:after {
+  border-color: #4a4747;
+  width: calc(100% - 10px);
+  height: calc(100% + 10px);
+}

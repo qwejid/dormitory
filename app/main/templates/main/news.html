@@ -1,0 +1,82 @@
+{% extends 'main/base2.html' %}
+{% load static %}
+
+{% block title %}<title>КГУ Новости</title>{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'main/css/news.css' %}">
+{% endblock %}
+ 
+{% block main %}
+<div class="jumbotron p-3 text-black rounded" style="background-image: url(../../static/main/images/новости.jpg); background-position: 0% 30%;background-size: cover; padding: 6rem!important;">
+  <div class="col-md-6 px-0">
+    <h1 class="display-3 font-italic">Новости КГУ</h1>
+    <p class="lead my-3">Узнавайте первыми о важных объявлениях администрации, мероприятиях и других интересных событиях, происходящих в нашем общежитии.</p>
+  </div>
+</div>    
+
+<div class="container" ><a name="section1" ></a></div>
+    <div style="padding: 30px 0 ;">           
+        <div class="cat">    
+            {% if cat_selected == 0 %}
+                <li class="double-border-button">Все категории</li>
+            {% else %}
+                <li><a href="{% url 'news' %}#section1" class="double-border-button no-scroll-effect">Все категории</a></li>
+            {% endif %}
+    
+            {% for c in cats %}
+                {% if c.pk == cat_selected %}
+                    <li class="double-border-button">{{ c.name }}</li>
+                {% else %}
+                    <li><a href="{{ c.get_absolute_url }}#section1" class="double-border-button no-scroll-effect">{{ c.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+        
+        <li> <a class="double-border-button" href="{% url 'add' %}">Добавить новость</a></li>         
+          
+        </div>
+  </div>
+        
+<div class="dormitory-wrap">  
+
+  {% for p in page_obj %}        
+    <div class="my-3 mx-auto p-relative bg-white shadow-1 orange-hover" style="width: 340px; overflow: hidden; border-radius: 1px; display: inline-block;">
+                      
+      {% if p.image %}
+      <img src="{{p.image.url}}" alt="Картинка" class="d-block w-full" style="width: 340px; height: 300px; object-fit: cover;">
+      {% elif p.cat.name == 'Администрация' %}
+      <img src="{% static 'main/images/Admin.jpg' %}" alt="Картинка" class="d-block w-full" style="width: 340px; height: 300px; object-fit: cover;">
+      {% elif p.cat.name == 'Студсовет' %}
+      <img src="{% static 'main/images/студсовет.jpg' %}" alt="Картинка" class="d-block w-full" style="width: 340px; height: 300px; object-fit: cover;">
+      {% else %}
+      <img src="{% static 'main/images/student.jpg' %}" alt="Картинка" class="d-block w-full" style="width: 340px; height: 300px; object-fit: cover;">
+      {% endif %}
+        
+      <div class="px-1 py-1">
+          <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-1px">
+              {{ p.date }}
+          </p>
+  
+          <h1 class="ff-serif font-weight-bolder text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+              {{p.title}}
+          </h1>
+  
+          <p class="mb-1 py-1">
+              {{p.text|linebreaksbr|truncatewords:12}}
+          </p>
+      </div>
+        
+      <p class="mb-1 pyy-1"><a href="{{ p.get_absolute_url }}" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" style="position: absolute; bottom: 0;  left: 0;">
+          Читать далее...
+      </a></p>
+        
+    </div>
+        
+  {% endfor %}
+
+</div>
+        
+      
+
+{% endblock %}
+
+

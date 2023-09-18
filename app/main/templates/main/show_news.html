@@ -1,0 +1,36 @@
+{% extends 'main/base2.html' %}
+{% load static %}
+
+    {% block title %}<title>{{ post_news.title }}</title>{% endblock %} 
+    
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/show_news.css' %}">
+     {% endblock %}
+       
+    
+  {% block main %}
+    <div class="container ">        
+            <h1><span class="title">{{ post_news.title }}</span></h1>                        
+            <div class="image-container"> 
+              {% if post_news.image %}
+              <img src="{{post_news.image.url}}" alt="Картинка" class="img">
+              {% elif post_news.cat.name == 'Администрация' %}
+              <img src="{% static 'main/images/Admin.jpg' %}" alt="Картинка" >
+              {% elif post_news.cat.name == 'Студсовет' %}
+              <img src="{% static 'main/images/студсовет.jpg' %}" alt="Картинка" >
+              {% else %}
+              <img src="{% static 'main/images/student.jpg' %}" alt="Картинка" >
+              {% endif %}
+            </div>
+
+            <div class="text-content ">
+              
+              <p class="text">{{post_news.text|linebreaksbr|safe}}</p>
+              <p class="date">Дата публикации: {{post_news.date}}</p>  
+            </div>
+      </div>
+                  
+    </div>
+    {% endblock %}
+

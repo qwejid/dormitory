@@ -1,0 +1,58 @@
+{% extends 'main/base2.html' %}
+{% load static %}
+
+{% block title %}<title>Добавление новости</title>{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'main/css/add_news.css' %}">
+{% endblock %}  
+
+{% block main %}
+<form action="{% url 'add' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="page">
+
+            
+            <div class="field field_v1">
+            {{form.title}}
+            <span class="field__label-wrap" aria-hidden="true">
+              <span class="field__label">Название</span>
+            </span>
+            </div>
+
+            
+
+            <div class="field field_v3">
+              {{form.text}}
+              <span class="field__label-wrap" aria-hidden="true">
+                <span class="field__label">Текст</span>
+              </span>
+              </div>
+              <span>{{ from.non_field_errors }}</span>
+
+              {{form.image}}
+              {{form.cat}}
+                        
+          </div>
+          <div class="linktr">
+            <button class="linktr__goal r-link" type="submit">Опубликовать 💪💪💪</button>
+            
+          </div>
+    
+</form>
+
+<script>
+  var textareas = document.querySelectorAll('textarea.auto-resize-textarea');
+
+  textareas.forEach(function(textarea) {
+      textarea.addEventListener('input', function () {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight) + 'px';
+      });
+
+    
+  });
+</script>
+  
+{% endblock %}
