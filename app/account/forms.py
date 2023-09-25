@@ -10,7 +10,7 @@ class ProfileEditForm(forms.ModelForm):
 
         widgets = {
            'room' : forms.TextInput(attrs={'placeholder':'Введите номер комнаты'}),
-           'contract_number' : forms.TextInput(attrs={ 'placeholder':'Введите номер договора о проживании'}),
+           'contract_number' : forms.TextInput(attrs={ 'class' : 'col-sm-9 text-secondary','placeholder':'Введите номер договора о проживании'}),
            'contract_number' : forms.TextInput(attrs={ 'placeholder':'Введите номер студ.билета'}),
            
         }
