@@ -1,0 +1,73 @@
+{% extends 'main/base2.html' %}
+{% load static %}
+
+{% block title %}<title>Добавление товара</title>{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'main/css/add_news.css' %}">
+{% endblock %}  
+
+{% block main %}
+<form action="{% url 'main:create_product' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="page">
+
+            
+            <div class="field field_v1">
+            {{form.name}}
+            <span class="field__label-wrap" aria-hidden="true">
+              <span class="field__label">Название</span>
+            </span>
+            </div>
+
+            
+
+            <div class="field field_v3" >
+              {{form.description}}
+              <span class="field__label-wrap" aria-hidden="true">
+                <span class="field__label">Описание</span>
+              </span>
+              </div>
+              <span>{{ from.non_field_errors }}</span>
+
+              {{form.image}}
+              {{form.cat_prod}}
+
+              <div class="field field_v1">
+                {{form.price}}
+                <span class="field__label-wrap" aria-hidden="true">
+                  <span class="field__label">Цена</span>
+                </span>
+                </div>
+
+                <div class="field field_v1">
+                    {{form.link}}
+                    <span class="field__label-wrap" aria-hidden="true">
+                      <span class="field__label">ссылка</span>
+                    </span>
+                    </div>
+              
+                        
+          </div>
+          <div class="linktr">
+            <button class="linktr__goal r-link" type="submit">Опубликовать 💪💪💪</button>
+            
+          </div>
+    
+</form>
+
+<script>
+  var textareas = document.querySelectorAll('textarea.auto-resize-textarea');
+
+  textareas.forEach(function(textarea) {
+      textarea.addEventListener('input', function () {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight) + 'px';
+      });
+
+    
+  });
+</script>
+  
+{% endblock %}

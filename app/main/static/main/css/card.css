@@ -27,3 +27,28 @@
     font-weight: bolder;
     font-size: 1.5em;        
   }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.step-links {
+    list-style: none;
+    padding: 0;
+   
+}
+
+.step-links a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: black;
+    border: solid 2px #fe8f21 ;
+}
+
+.step-links .current {
+    font-weight: bold;
+    margin: 0 5px;}
+

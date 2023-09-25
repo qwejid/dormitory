@@ -1,6 +1,8 @@
 from django.urls import path, include
 from . import views
 
+app_name = 'main' 
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('news', views.news, name='news'),
@@ -9,11 +11,6 @@ urlpatterns = [
     path('store', views.store, name='store'),
     path('store/<int:card_id>', views.show_card, name='show_card'),
     path('store/category/<int:cat_id>', views.show_prod_category, name='show_prod_category'),
-    path('profile', views.profile, name='profile'),
-    path('log', views.log, name='log'),
-    path('reg', views.reg, name='reg'),
-    path('add', views.add, name='add'),
-    
-    
-    
+    path('news/add', views.add, name='add'),
+    path('store/create_product', views.create_product, name='create_product'),   
 ]

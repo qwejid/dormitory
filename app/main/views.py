@@ -1,11 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from .models import *
-from .forms import *
+from main.forms import AddPostForm, AddProductForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.models import User
+
 
 
 def index(request): #Главная  
@@ -58,17 +63,32 @@ def show_news(request, news_id): #Конкретная новость
         }
     return render(request, 'main/show_news.html', context=context)
 
-def add(request): 
+@login_required(login_url='log')
+def add(request):
     if request.method == 'POST':
         form = AddPostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('news')
+            news = form.save(commit=False)
+            
+            # Определение категории на основе роли пользователя
+            if request.user.is_superuser:
+                # Если пользователь - суперпользователь, установите категорию "Администратор"
+                category_name = "Администрация"
+            else:
+                # В противном случае, установите категорию "Студент"
+                category_name = "Студент"
+            
+            # Поиск категории по имени
+            category, created = Category.objects.get_or_create(name=category_name)
+            
+            news.cat = category  # Установите категорию для новости
+            news.author = request.user  # Установите автора новости
+            news.save()
+            return redirect('main:news')
     else:
         form = AddPostForm()
 
-    
-    return render(request, 'main/add_news.html', {'form':form })
+    return render(request, 'main/add_news.html', {'form': form})
 
 # --------------------------------------------------------------------------
 
@@ -105,16 +125,23 @@ def show_prod_category(request, cat_id):
     }
     return render(request, 'main/store.html', context=context)
 
+@login_required(login_url='log')
+def create_product(request):
+    if request.method == 'POST':
+        form = AddProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.author = request.user
+            product.save()
+            return redirect('main:store')
+    else:
+        form = AddProductForm()
+    return render(request, 'main/add_prod.html', {'form': form})
+
 # --------------------------------------------------------------------------
 
-def profile(request): #Профиль
-    return render(request, 'main/profile.html')
 
-def log(request): #Авторизация
-    return render(request, 'registration/login.html')
 
-def reg(request): #Авторизация
-    return render(request, 'registration/login.html')
 
 
 

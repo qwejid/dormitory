@@ -19,21 +19,28 @@
       </li>
       <span class="justify-content-center">
         <li class="nav-item">
-         <a class="nav-link text-white" href="{% url 'index' %}">Главная</a>
+         <a class="nav-link text-white" href="{% url 'main:index' %}">Главная</a>
        </li>
        <li class="nav-item">
-         <a class="nav-link text-white" href="{% url 'news' %}">Новости</a>
+         <a class="nav-link text-white" href="{% url 'main:news' %}">Новости</a>
        </li>
        <li class="nav-item">
-         <a class="nav-link text-white" href="{% url 'store' %}">Магазин</a>
+         <a class="nav-link text-white" href="{% url 'main:store' %}">Магазин</a>
        </li>
-      </span>      
-       <!-- <li class="nav-item"  >
-         <a class="nav-link text-white inlet"  href="{% url 'log' %}">Войти</a>
-      </li> -->
+      </span>   
+      {% if request.user.is_anonymous %}   
+       
       <li class="nav-item" style="display: flex;">
-        <a class="nav-link text-white inlet" style="padding-right: 1px;"  href="{% url 'log' %}">Войти</a> <span class="nav-link text-white inlet">|</span> <a class="nav-link text-white inlet" style="padding-left: 1px;" href="{% url 'reg' %}">Регестрация</a>
+        <a class="nav-link text-white inlet" style="padding-right: 1px;"  href="{% url 'account:log' %}">Войти</a> <span class="nav-link text-white inlet">|</span> <a class="nav-link text-white inlet" style="padding-left: 1px;" href="{% url 'account:reg' %}">Регестрация</a>
      </li>
+     {%endif%}
+
+     {% if request.user.is_authenticated %}   
+     <li class="nav-item" style="display: flex;">
+      <a class="nav-link text-white inlet" style="padding-right: 1px;"  href="{% url 'account:profile' %}">{{user.username}}</a> <span class="nav-link text-white inlet">|</span> <a class="nav-link text-white inlet" style="padding-left: 1px;" href="{% url 'account:logout_user' %}">Выход</a>
+   </li>{%endif%}
+
+
      </ul>
    </nav>        
    <div class="container">            

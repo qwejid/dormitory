@@ -25,7 +25,7 @@
           {% if cat_selected == 0 %}
               <li class="double-border-button">Все категории</li>
           {% else %}
-              <li><a href="{% url 'store' %}#section1" class="double-border-button no-scroll-effect">Все категории</a></li>
+              <li><a href="{% url 'main:store' %}#section1" class="double-border-button no-scroll-effect">Все категории</a></li>
           {% endif %}
   
           {% for c in cats %}
@@ -35,6 +35,7 @@
                   <li><a href="{{ c.get_absolute_url }}#section1" class="double-border-button no-scroll-effect">{{ c.name }}</a></li>
               {% endif %}
           {% endfor %}
+          <li style="display: flex; justify-content: end; "> <a class="double-border-button" href="{% url 'main:create_product' %}">Добавить товар</a></li>         
       </div>
   </div>
 
@@ -65,4 +66,25 @@
       </div>  
   </div> </div> 
 
+{% endblock %}
+
+{% block paginator %}
+
+<div class="pagination" style="justify-content: center;">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1#section1">&laquo; Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}#section1">Предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}#section1">Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}#section1">Последняя &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}

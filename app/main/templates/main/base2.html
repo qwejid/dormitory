@@ -8,77 +8,49 @@
     {% block title %}{% endblock %} 
     
     <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/base2.css' %}">
+
     {% block stylesheet %}{% endblock %}  
     
-    <style>
-      .pagination {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-top: 20px;
-      }
-  
-      .step-links {
-          list-style: none;
-          padding: 0;
-         
-      }
-  
-      .step-links a {
-          margin: 0 5px;
-          text-decoration: none;
-          color: black;
-          border: solid 2px #fe8f21 ;
-      }
-  
-      .step-links .current {
-          font-weight: bold;
-          margin: 0 5px;
-      }
-  </style>
+    
   
   </head>
 
   <body>
-    <div class="container">   
+    <div class="container" style="min-height: calc(80vh - 50px);">   
       <div class="nav-scroller py-2 mb-2">
-        <nav class="nav d-flex justify-content-between align-items-center" style="font-size: 1.3em;" >
+        <nav class="nav d-flex justify-content-between align-items-center" style="font-size: 1.3em; flex-shrink: 1;" >
             <img src="{% static 'main/images/logo2.png' %}" alt="Лого" style="width: 70px; padding: 5px; justify-content: left;">
             <span style=" justify-content: center;">
-            <a class="p-2 text-muted text-decoration-none tran" href="{% url 'index' %}">Главная</a>
-            <a class="p-2 text-muted text-decoration-none tran" href="{% url 'news' %}">Новости</a>
-            <a class="p-2 text-muted text-decoration-none tran" href="{% url 'store' %}">Магазин</a>
+            <a class="p-2 text-muted text-decoration-none tran" href="{% url 'main:index' %}">Главная</a>
+            <a class="p-2 text-muted text-decoration-none tran" href="{% url 'main:news' %}">Новости</a>
+            <a class="p-2 text-muted text-decoration-none tran" href="{% url 'main:store' %}">Магазин</a>
             </span>
+          <span class="justify-content-end">
+           
+          {% if request.user.is_anonymous %}
+          <a class="p-2 text-muted text-decoration-none tran" href="{% url 'account:log' %}">Вход</a><span class="p-2 text-muted text-decoration-none tran">|</span><a class="p-2 text-muted text-decoration-none tran" href="{% url 'account:reg' %}">Регистрация</a>
+          {%endif%}
           
-          <!-- <a class="p-2 text-muted text-decoration-none tran" href="{% url 'profile' %}">Профиль</a> -->
-          <a class="p-2 text-muted text-decoration-none tran" href="{% url 'log' %}">Вход</a>             
+          {% if request.user.is_authenticated %} 
+          <a class="p-2 text-muted text-decoration-none tran" href="{% url 'account:profile' %}">{{user.username}}</a><span class="p-2 text-muted text-decoration-none tran">|</span><a class="p-2 text-muted text-decoration-none tran" href="{% url 'account:logout_user' %}">Выход</a>
+          {%endif%}
+        </span>
+          
         </nav>
       </div>
     
       {% block main %}
       {% endblock %}
 
-      <div class="pagination" style="justify-content: center;">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1#section1">&laquo; Первая</a>
-                <a href="?page={{ page_obj.previous_page_number }}#section1">Предыдущая</a>
-            {% endif %}
-    
-            <span class="current">
-                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
-            </span>
-    
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}#section1">Следующая</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}#section1">Последняя &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+
+      {% block paginator %}
+      {% endblock %}
+     
 
     </div>
-    <div style="border-top:1px solid #dee2e6; margin-top: 20px;">
-        <div class="container" style="flex-shrink: 0;">
+    <div class="footer" style="border-top:1px solid #dee2e6; margin-top: 20px; padding-bottom: -5px;">
+        <div class="container " style="flex-shrink: 0;">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 " >
               <div class="col-md-4 d-flex align-items-center">
                 <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">

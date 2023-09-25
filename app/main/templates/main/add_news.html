@@ -8,7 +8,7 @@
 {% endblock %}  
 
 {% block main %}
-<form action="{% url 'add' %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'main:add' %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
 
           <div class="page">
@@ -23,7 +23,7 @@
 
             
 
-            <div class="field field_v3">
+            <div class="field field_v3" >
               {{form.text}}
               <span class="field__label-wrap" aria-hidden="true">
                 <span class="field__label">Текст</span>
@@ -32,7 +32,7 @@
               <span>{{ from.non_field_errors }}</span>
 
               {{form.image}}
-              {{form.cat}}
+              
                         
           </div>
           <div class="linktr">
