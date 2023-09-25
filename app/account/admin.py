@@ -6,7 +6,7 @@ from django.contrib.auth.admin import UserAdmin
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'date_of_birth', 'photo','room', 'contract_number', 'student_ID', )
+    list_display = ('user', 'photo','room', 'contract_number', 'student_ID', )
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_active', 'date_joined')
