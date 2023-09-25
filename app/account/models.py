@@ -18,15 +18,19 @@ contract_number_validator = RegexValidator(
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
+    photo = models.ImageField(upload_to=user_directory_path, blank=True, null=True, verbose_name="Фото")
     room = models.IntegerField(
         validators=[MaxValueValidator(9999)],  # Максимальное значение 9999 (4 цифры)
-        help_text="Введите номер комнаты",null=True
+        help_text="Введите номер комнаты",
+        null=True,
+        verbose_name="Номер комнаты"
     )
     contract_number = models.CharField(
         max_length=10,  # Максимум 10 символов (9 цифр + слэш)
         validators=[contract_number_validator],
-        help_text="Формат: 750256/380",null=True
+        help_text="Формат: 750256/380",
+        null=True,
+        verbose_name="Номер договора"
     )
     student_ID = models.CharField(
         max_length=6,  # Максимум 6 символов
@@ -34,7 +38,9 @@ class Profile(models.Model):
             MinLengthValidator(limit_value=6, message="Должно быть ровно 6 символов"),
             MaxLengthValidator(limit_value=6, message="Должно быть ровно 6 символов")
         ],  
-        help_text="Ровно 6 символов",null=True
+        help_text="Ровно 6 символов",
+        null=True,
+        verbose_name="Номер студенческого"
     )
     class Meta:
         verbose_name_plural = "Профили"
