@@ -25,7 +25,13 @@
                     
                     <div class="mt-3">
                       <h4>{{ user.username }}</h4>
-                      <p class="text-secondary mb-1">Студент</p>
+                      {% if request.user.is_superuser %}
+                         <!-- # Если пользователь - суперпользователь, установите категорию "Администратор" -->
+                         <p class="text-secondary mb-1">Администратор</p>
+                      {% else %}
+                        <!-- # В противном случае, установите категорию "Студент" -->
+                        <p class="text-secondary mb-1">Студент</p>
+                      {% endif %}
                       <p class="text-muted font-size-sm">КГУ им.Циолковского</p>
                       <a href="{% url 'main:add' %}"><button class="btn btn-primary">Новость</button></a>
                       <a href="{% url 'main:create_product' %}"><button class="btn btn-outline-primary">Товар</button></a>
@@ -62,8 +68,19 @@
               <div class="card mb-3">
                 <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}  
+                    
+                  {% csrf_token %}
+                  {% for field in form %}
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">{{ field.label_tag }}</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ field }}
+                    </div>
+                  </div>
+                  <hr>
+                {% endfor %}
                                 
                   
                   <div class="row">
