@@ -17,6 +17,12 @@ class News(models.Model):
     
     def get_absolute_url(self):
         return reverse('main:show_news', kwargs={'news_id': self.pk})
+    
+    def get_absolute_update_url(self):
+        return reverse('main:update_news', kwargs={'news_id': self.pk})
+    
+    def get_absolute_delete_url(self):
+        return reverse('main:delete_news', kwargs={'news_id': self.pk})
 
     class Meta:
         verbose_name_plural = "Новости"
