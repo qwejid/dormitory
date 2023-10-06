@@ -9,10 +9,9 @@ class ProfileEditForm(forms.ModelForm):
         fields = ['photo', 'room', 'contract_number', 'student_ID']
 
         widgets = {
-           'room' : forms.TextInput(attrs={'placeholder':'Введите номер комнаты'}),
-           'contract_number' : forms.TextInput(attrs={ 'class' : 'col-sm-9 text-secondary','placeholder':'Введите номер договора о проживании'}),
-           'contract_number' : forms.TextInput(attrs={ 'placeholder':'Введите номер студ.билета'}),
-           
+           'room' : forms.TextInput(attrs={'class':'form-control','placeholder':'Введите номер комнаты'}),
+           'contract_number' : forms.TextInput(attrs={'class':'form-control', 'placeholder':'Введите номер договора о проживании'}),
+           'student_ID' : forms.TextInput(attrs={ 'class':'form-control','placeholder':'Введите номер студ.билета'}),
         }
 
 class RegisterUserForm(UserCreationForm):
@@ -25,11 +24,12 @@ class RegisterUserForm(UserCreationForm):
             model = User
             fields = [
                 "username",
-                "email",
-                "password1",
-                "password2",
                 "first_name",
                 "last_name",
+                "password1",
+                "password2",
+                "email",       
+                
             ]
             labels = {
                 "username": "Имя пользователя",
