@@ -13,11 +13,11 @@ from account.models import Profile
 from account.forms import RegisterUserForm, ProfileEditForm
 
 
+
 def profile(request): #Профиль
     user_news = News.objects.filter(author=request.user).order_by('-date') 
     user_product = Product.objects.filter(author=request.user).order_by('-publication_date') 
-    user_prof = Profile.objects.get(user=request.user)
-    
+    user_prof = Profile.objects.get(user=request.user)       
 
     context = {
         'user_news': user_news,
@@ -26,10 +26,6 @@ def profile(request): #Профиль
 
         }
     return render(request, 'account/profile2.html', context)
-
-
-
-
 
 @login_required(login_url='log')
 def edit_profile(request):
@@ -54,9 +50,6 @@ def edit_profile(request):
 
     return render(request, 'account/edit_profile.html', context)
 
-
-
-
 def log(request): # Авторизация
     user_auth_failed = False  # Флаг для отслеживания неудачной аутентификации
 
@@ -69,8 +62,7 @@ def log(request): # Авторизация
             post_news = News.objects.filter(cat_id=1).order_by('-date')[:3]  
             
             context = {
-                'post_news': post_news,
-                
+                'post_news': post_news,                
             }            
 
             return render(request, 'main/index.html', context)

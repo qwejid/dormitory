@@ -5,6 +5,7 @@
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'account/css/profile.css' %}">
 {% endblock %}
+
 {% block main %}
 <div class="container">
     <div class="main-body">
@@ -119,6 +120,9 @@
                     </div>
                   </div>
                 </div>
+
+                
+
               </div>
 
               <div class="row gutters-sm">
@@ -128,19 +132,55 @@
                       <h4 class="d-flex align-items-center mb-3">Ваши новости</h4>        
                       
                       
-                  <ul>
+                  <ul style="list-style: none;">
                       {% for news in user_news %}
-                          <li style="padding-bottom: 2px;">
+                          <li style="padding-bottom: 2px; border-bottom: solid black 2px;">
                               <a class="text-muted text-decoration-none" href="{{ news.get_absolute_url }}">{{ news.title }}</a>
-                              <!-- Здесь можно отобразить другую информацию о новости, если это необходимо -->
+                              <div style=" display: inline;;">
+
+                                <!-- кнопка обновить -->
+                                <a class="text-muted text-decoration-none" href="{{ news.get_absolute_update_url }}"><button style="margin: 5px;" type="submit" class="delbut update noselect"><span class='text'>Обновить                                      
+                                </span>
+                                  <span class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capslock-fill" viewBox="0 0 16 16">
+                                      <path d="M7.27 1.047a1 1 0 0 1 1.46 0l6.345 6.77c.6.638.146 1.683-.73 1.683H11.5v1a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1H1.654C.78 9.5.326 8.455.924 7.816L7.27 1.047zM4.5 13.5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1z"/>
+                                    </svg>
+
+                                </span>
+                              </button></a>
+                              <!-- --------------------------------------------------------- -->
+                              
+
+                              <!-- кнопка удалить -->
+                                <form method="post" id="delete-news-form" action="{{ news.get_absolute_delete_url }}"  id="delete-news-form">
+                                    {% csrf_token %}
+
+                                    <button style="margin: 5px;" type="submit" onclick="confirmDelete()" class="delete-news-button delbut noselect" name="confirm_delete" value="1" ><span class='text'>Удалить                                      
+                                      </span>
+                                        <span class="icon">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                          </svg>
+
+                                      </span>
+                                    </button>
+                                </form>
+                                
+                              </div>
+                              
+                            
+                          <!-- --------------------------------------------------------- -->
+                            
                           </li>
                       {% empty %}
                           <p>У вас пока нет новостей.</p>
                       {% endfor %}
                   </ul>
+                                 
 
                     </div>
-                  </div>
+                        </div>
+                  
                 </div>
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
@@ -148,9 +188,45 @@
                       <h4 class="d-flex align-items-center mb-3">Ваши товары</h4>
                       <ul>
                         {% for product in user_product %}
-                            <li>
-                                <a class="text-muted text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                                <!-- Здесь можно отобразить другую информацию о новости, если это необходимо -->
+                            <li style="padding-bottom: 2px; border-bottom: solid black 2px;">
+                                <a class="text-muted text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.name }}</a>                      
+
+
+                                <div style=" display: inline;;">
+
+                                  <!-- кнопка обновить -->
+                                  <a class="text-muted text-decoration-none" href="{{ product.get_absolute_update_url }}"><button style="margin: 5px;" type="submit" class="delbut update noselect"><span class='text'>Обновить                                      
+                                  </span>
+                                    <span class="icon">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capslock-fill" viewBox="0 0 16 16">
+                                        <path d="M7.27 1.047a1 1 0 0 1 1.46 0l6.345 6.77c.6.638.146 1.683-.73 1.683H11.5v1a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1H1.654C.78 9.5.326 8.455.924 7.816L7.27 1.047zM4.5 13.5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1z"/>
+                                      </svg>
+  
+                                  </span>
+                                </button>
+                              </a>
+                                <!-- --------------------------------------------------------- -->
+                                
+  
+                                <!-- кнопка удалить -->
+                                  <form method="post" id="delete-news-form" action="{{ product.get_absolute_delete_url }}"  id="delete-news-form">
+                                      {% csrf_token %}
+  
+                                      <button style="margin: 5px;" type="submit" onclick="confirmDelete()" class="delete-news-button delbut noselect" name="confirm_delete" value="1" ><span class='text'>Удалить                                      
+                                        </span>
+                                          <span class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                              <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                            </svg>
+  
+                                        </span>
+                                      </button>
+                                  </form>
+                                  
+                                </div>
+
+
+
                             </li>
                         {% empty %}
                             <p>У вас пока нет опубликованных товаров.</p>
@@ -168,4 +244,17 @@
 
         </div>
     </div>
+
+    <script>
+      function confirmDelete() {
+          if (confirm('Вы действительно хотите удалить запись?')) {                                      
+              document.getElementById('delete-news-form').submit();
+          
+          }
+          else {
+              event.preventDefault();
+              return false;
+          }
+      }
+  </script>
     {% endblock %}

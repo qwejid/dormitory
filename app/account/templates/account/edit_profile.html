@@ -67,28 +67,35 @@
             <div class="col-md-8">
               <div class="card mb-3">
                 <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    
-                  {% csrf_token %}
-                  {% for field in form %}
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">{{ field.label_tag }}</h6>
+                  <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">{{ field.label_tag }}</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ field }}
+                            {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        </div>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{ field }}
+                    <hr>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        </div>
                     </div>
-                  </div>
-                  <hr>
-                {% endfor %}
-                                
-                  
-                  <div class="row">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
-                    </div>
-                  </div>
-                  </form> 
+                </form>
+                
+                
                 
                 </div>
               </div>

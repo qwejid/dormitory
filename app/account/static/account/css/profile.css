@@ -1,11 +1,11 @@
 body{
     background: #f7f7ff;
-    margin-top:20px;
+    
 }
 .card {
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction:column-reverse;
     min-width: 0;
     word-wrap: break-word;
     background-color: #fff;
@@ -23,3 +23,112 @@ body{
     text-decoration: none;
 
 }
+
+
+
+
+.py-2{
+    margin-top: 0;
+}
+
+
+
+
+
+.noselect {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+		-webkit-tap-highlight-color: transparent;
+}
+
+.delbut {
+	width: 120px;
+	height: 30px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	background: red;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+	background: #e62222;
+    
+}
+
+.delbut, .delbut span {
+	transition: 200ms;
+}
+
+.delbut .text {
+	transform: translateX(15px);
+	color: white;
+	font-weight: bold;
+    
+}
+
+.delbut .icon {
+	position: absolute;
+	border-left: 1px solid #c41b1b;
+	transform: translateX(80px);
+	height: 30px;
+	width: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.delbut svg {
+	width: 13px;
+	fill: #eee;
+}
+
+.delbut:hover {
+	background: #ff3636;
+}
+
+.delbut:hover .text {
+	color: transparent;
+}
+
+.delbut:hover .icon {
+	width: 150px;
+	border-left: none;
+	transform: translateX(-14%);
+}
+
+.delbut:focus {
+	outline: none;
+}
+.update {
+    background-color: rgb(67, 154, 67);
+    width: 135px;
+	height: 30px;
+}
+
+.update:hover {
+	background: rgb(67, 154, 67);
+}
+
+.update .icon {
+	position: absolute;
+	border-left: 1px solid rgb(67, 154, 67);
+	transform: translateX(95px);
+	height: 30px;
+	width: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.update:hover .icon {
+	width: 150px;
+	border-left: none;
+	transform: translateX(-9%);
+}
+
+li { display: flex;
+    flex-direction: column;}
