@@ -8,7 +8,7 @@
 {% endblock %}  
 
 {% block main %}
-<form action="{% url 'main:add' %}" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
 
           <div class="page">
@@ -31,12 +31,15 @@
               </div>
               <span>{{ from.non_field_errors }}</span>
 
-              {{form.image}}
+              <div style="padding-left: 15px;">
+                
+                {{ form.image }}
+              </div>
               
                         
           </div>
           <div class="linktr">
-            <button class="linktr__goal r-link" type="submit">Опубликовать 💪💪💪</button>
+            <button class="linktr__goal r-link" type="submit">{{ text }}</button>
             
           </div>
     
