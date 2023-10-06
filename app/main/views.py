@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from .models import *
@@ -10,6 +10,7 @@ from django.views.generic import CreateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
+from account.models import Profile
 
 
 
@@ -79,7 +80,7 @@ def add(request):
                 category_name = "Студент"
             
             # Поиск категории по имени
-            category, created = Category.objects.get_or_create(name=category_name)
+            category,categored = Category.objects.get_or_create(name=category_name)
             
             news.cat = category  # Установите категорию для новости
             news.author = request.user  # Установите автора новости
@@ -87,8 +88,66 @@ def add(request):
             return redirect('main:news')
     else:
         form = AddPostForm()
+    
+    context = {
+        'form': form,         
+        'text' : 'Опубликовать 💪💪💪'
+    }
 
-    return render(request, 'main/add_news.html', {'form': form})
+    return render(request, 'main/add_news.html', context)
+
+@login_required(login_url='log')
+def update_news(request, news_id):
+    # Получите новость по её ID или верните 404, если не существует
+    news = get_object_or_404(News, pk=news_id)
+
+    # Проверьте, является ли текущий пользователь автором новости
+    if news.author != request.user:
+        # Если пользователь не является автором, вы можете выполнить нужные действия,
+        # например, перенаправить пользователя на другую страницу или отобразить сообщение об ошибке.
+        return HttpResponseForbidden("У вас нет разрешения на обновление этой новости.")
+
+    if request.method == 'POST':
+        # Обработайте обновление новости, используя данные из формы
+        form = AddPostForm(request.POST, request.FILES, instance=news)
+        if form.is_valid():
+            news = form.save(commit=False)
+            news.save()
+            return redirect('main:show_news', news_id=news_id)
+    else:
+        # Отобразите форму для обновления новости
+        form = AddPostForm(instance=news)
+    
+    context = {
+        'form': form, 
+        'news': news, 
+        'text' : 'Обновить 💪💪💪'
+    }
+
+    return render(request, 'main/add_news.html', context)
+
+
+@login_required(login_url='log')
+def delete_news(request, news_id):
+    # Получите новость по её ID или верните 404, если не существует
+    news = get_object_or_404(News, pk=news_id)
+
+    # Проверьте, является ли текущий пользователь автором новости
+    if news.author != request.user:
+        # Если пользователь не является автором, вы можете выполнить нужные действия,
+        # например, перенаправить пользователя на другую страницу или отобразить сообщение об ошибке.
+        return HttpResponseForbidden("У вас нет разрешения на удаление этой новости.")
+
+    if request.method == 'POST':
+        if request.POST.get("confirm_delete"):
+              # Удалите новость, если пользователь подтвердил действие
+              news.delete()
+              
+        return redirect('account:profile')  # Измените на страницу пользователя
+
+    
+    
+    return render(request, 'account/profile2.html', {'news': news})
 
 # --------------------------------------------------------------------------
 
@@ -136,22 +195,67 @@ def create_product(request):
             return redirect('main:store')
     else:
         form = AddProductForm()
-    return render(request, 'main/add_prod.html', {'form': form})
+
+    context = {
+        'form': form, 
+        'text' : 'Опубликовать 💪💪💪'
+    }
+    return render(request, 'main/add_prod.html', context)
+
+
+@login_required(login_url='log')
+def update_prod(request, card_id):
+    # Получите товар по её ID или вернёт 404, если не существует
+    product = get_object_or_404(Product, pk=card_id)
+
+    # Проверьте, является ли текущий пользователь автором товара
+    if product.author != request.user:
+        # Если пользователь не является автором, вы можете выполнить нужные действия,
+        # например, перенаправить пользователя на другую страницу или отобразить сообщение об ошибке.
+        return HttpResponseForbidden("У вас нет разрешения на обновление этого товара.")
+
+    if request.method == 'POST':
+        # Обработайте обновление новости, используя данные из формы
+        form = AddProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.save()
+            return redirect('main:show_card', card_id=card_id)
+    else:
+        # Отобразите форму для обновления новости
+        form = AddProductForm(instance=product)
+    
+    context = {
+        'form': form, 
+        'product': product, 
+        'text' : 'Обновить 💪💪💪'
+    }
+
+    return render(request, 'main/add_prod.html', context)
+
+
+@login_required(login_url='log')
+def delete_prod(request, card_id):
+    # Получите новость по её ID или верните 404, если не существует
+    product = get_object_or_404(Product, pk=card_id)
+
+    # Проверьте, является ли текущий пользователь автором новости
+    if product.author != request.user:
+        # Если пользователь не является автором, вы можете выполнить нужные действия,
+        # например, перенаправить пользователя на другую страницу или отобразить сообщение об ошибке.
+        return HttpResponseForbidden("У вас нет разрешения на удаление этого товара.")
+
+    if request.method == 'POST':
+        if request.POST.get("confirm_delete"):
+              # Удалите новость, если пользователь подтвердил действие
+              product.delete()
+              
+        return redirect('account:profile')  # Измените на страницу пользователя
+
+    
+    
+    return render(request, 'account/profile2.html', {'product': product})
 
 # --------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

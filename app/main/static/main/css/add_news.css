@@ -132,6 +132,7 @@ HELPERS
   
     line-height: 1;
     font-size: var(--fieldHintFontSize, inherit);
+    
   
     transition: top .2s cubic-bezier(0.9, -0.15, 0.1, 1.15), opacity .2s ease-out, font-size .2s ease-out;
   }

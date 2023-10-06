@@ -25,3 +25,7 @@
 .footer {
     flex: 0 0 auto;
 }
+
+body {
+    background: #f7f7ff;
+}

@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-    'account.apps.AccountConfig'
+    'account.apps.AccountConfig',
+    'sberbank'
     
     
 ]
@@ -126,3 +127,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 
+# MERCHANTS = {
+#   %merchant_id%: {
+#     'username': '%merchant_username%',
+#     'password': '%merchant_password%',
+#     'success_url': 'http://127.0.0.1:8000/sberbank/payment/success',
+#     'fail_url': 'http://127.0.0.1:8000/sberbank/payment/fail',
+#     'app_success_url': 'http://127.0.0.1:8000/payment/success',
+#     'app_fail_url': 'http://127.0.0.1:8000/payment/fail',
+#   }
+# }

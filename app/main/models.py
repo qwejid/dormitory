@@ -45,17 +45,23 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название')
     image = models.ImageField(upload_to='store_images/%Y/%m/%d', blank=True ,verbose_name="Картинка товара")
     description = models.TextField(verbose_name='Описание')
-    cat_prod = models.ForeignKey('Category_prod', on_delete=models.PROTECT, null=True, verbose_name="Категория товара")
+    cat_prod = models.ForeignKey('Category_prod', on_delete=models.PROTECT, verbose_name="Категория товара")
     price = models.DecimalField(max_digits=10, decimal_places=0,  verbose_name='Цена')
     link = models.URLField(max_length=200, verbose_name='Ссылка')
     publication_date = models.DateTimeField(verbose_name='Дата публикации', auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)  # Добавьте поле ForeignKey для автора новости
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  # Добавьте поле ForeignKey для автора новости
 
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
         return reverse('main:show_card', kwargs={'card_id': self.pk})
+    
+    def get_absolute_update_url(self):
+        return reverse('main:update_prod', kwargs={'card_id': self.pk})
+    
+    def get_absolute_delete_url(self):
+        return reverse('main:delete_prod', kwargs={'card_id': self.pk})
 
     class Meta:
         verbose_name = 'Товар'
