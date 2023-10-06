@@ -21,7 +21,7 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to=user_directory_path, blank=True, null=True, verbose_name="Фото")
     room = models.IntegerField(
         validators=[MaxValueValidator(9999)],  # Максимальное значение 9999 (4 цифры)
-        help_text="Введите номер комнаты",
+        help_text="Формат: 403",
         null=True,
         verbose_name="Номер комнаты"
     )
@@ -38,7 +38,7 @@ class Profile(models.Model):
             MinLengthValidator(limit_value=6, message="Должно быть ровно 6 символов"),
             MaxLengthValidator(limit_value=6, message="Должно быть ровно 6 символов")
         ],  
-        help_text="Ровно 6 символов",
+        help_text="Формат: 123456",
         null=True,
         verbose_name="Номер студенческого"
     )
